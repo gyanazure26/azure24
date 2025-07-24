@@ -50,11 +50,42 @@
 						"referenceName": "dynamic_tbl",
 						"type": "DatasetReference",
 						"parameters": {
-							"tbl_Name": "staging_1",
+							"tbl_Name": "staging",
 							"sch_Name": "DBO"
 						}
 					}
 				]
+			},
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
+					"url": "https://prod-30.centralindia.logic.azure.com:443/workflows/fac07be905074348ba10ea7b21cef027/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=rfMZkCccUJx0kgtxYf0vfU0hWD5AS09-GKQS_ffsEMU",
+					"body": {
+						"value": "{\n    \"PipelineName\": \"@{pipeline().Pipeline}\",\n    \"DataFactoryName\": \"@{pipeline().DataFactory}\",\n    \"ErrorMessage\": \"File is Missing\"\n}",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"annotations": []
