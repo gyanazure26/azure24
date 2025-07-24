@@ -34,8 +34,6 @@
 			{
 				"name": "ForEach1",
 				"type": "ForEach",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Lookup_table_copy1",
@@ -121,11 +119,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"looktablearray": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"lastPublishTime": "2025-07-21T17:26:45Z"
 	},
